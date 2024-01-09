@@ -39,50 +39,50 @@ class User
         return $this->id;
     }
 
-    public function getlastName(): ?string
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
-    public function setlastName(string $lastName): static
+    public function setLastName(string $lastName): static
     {
         $this->lastName = $lastName;
 
         return $this;
     }
 
-    public function getfirstName(): ?string
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
-    public function setfirstName(string $firstName): static
+    public function setFirstName(string $firstName): static
     {
         $this->firstName = $firstName;
 
         return $this;
     }
 
-    public function getbirthdate(): ?\DateTimeInterface
+    public function getBirthdate(): ?\DateTimeInterface
     {
         return $this->birthdate;
     }
 
-    public function setbirthdate(\DateTimeInterface $birthdate): static
+    public function setBirthdate(\DateTimeInterface $birthdate): static
     {
         $this->birthdate = $birthdate;
 
         return $this;
     }
 
-    public function getemail(): ?string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(string $Email): static
+    public function setEmail(string $email): static
     {
-        $this->Email = $Email;
+        $this->email = $email;
 
         return $this;
     }
