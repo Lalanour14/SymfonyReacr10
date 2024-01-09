@@ -4,8 +4,10 @@ namespace App\Entity;
 
 use App\Repository\PossesionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: PossesionRepository::class)]
+#[ApiResource]
 class Possesion
 {
     #[ORM\Id]
@@ -66,7 +68,7 @@ class Possesion
         return $this;
     }
 
-    public function getUserId(): ?User
+    public function getUserId(): ?user
     {
         return $this->userId;
     }
