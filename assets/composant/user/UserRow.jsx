@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useState } from "react"
+
 /**
  * 
  * @param {{id:string, lastName:string, firstName:string, brithdate:string, email:string,
@@ -8,8 +9,10 @@ import React from "react"
  */
 
 
-export function UserRow ({user}){
+export  function UserRow ({user}){
 
+    
+    
     return <tr>
         <td>{user.id}</td>
         <td>{user.lastName}</td>
@@ -18,8 +21,9 @@ export function UserRow ({user}){
         <td>{user.email}</td>
         <td>{user.address}</td>
         <td>{user.phone}</td>
-        <td>
-            <button>Delete</button>
-        </td>
+        <td><button 
+        > Delete</button></td>
+        
+        
     </tr>
 }

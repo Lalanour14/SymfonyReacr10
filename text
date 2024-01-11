@@ -1,0 +1,6 @@
+<button onClick={()=>{
+                setDeleteU(deleteU.filter(a => a.id !== user.id
+                    )
+                    );
+            }}
+           / >

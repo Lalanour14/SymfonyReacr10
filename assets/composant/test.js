@@ -16,7 +16,7 @@ export default function Test (props){
     return <>
     <div>ListUsers</div>
     <ListUsers users={USERS}/>
-    < button >TEST</button> 
+    < button >Add</button> 
     </>;
 
 }
@@ -27,7 +27,8 @@ function ListUsers ({users}){
 
     for(let user of users){
 
-        rows.push(<UserRow user={user} key={user.id}/> )
+        rows.push(<UserRow user={user} key={user.id}
+         onClick={deleteUser()} /> )
     }
 
     return <table className='table'>
@@ -46,9 +47,15 @@ function ListUsers ({users}){
         <tbody>
             {rows}
             
+            
         </tbody>
 
         </table>
+
+}
+
+ function deleteUser (){
+
 
 }
 
