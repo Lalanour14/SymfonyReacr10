@@ -23,6 +23,7 @@ Encore
     .addEntry('app', './assets/app.js')
     .addEntry('test', './assets/controller/test.js')
     .addEntry('produit', './assets/controller/produit.js')
+    .addEntry('singleproduit', './assets/controller/singleproduit.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

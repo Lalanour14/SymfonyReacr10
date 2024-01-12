@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import React from 'react';
 
 let initialArtists = [
   { id: 0, name: 'Marta Colvin Andrade' },
@@ -6,7 +7,7 @@ let initialArtists = [
   { id: 2, name: 'Louise Nevelson'},
 ];
 
-export default function List() {
+export default function SingleProduit () {
   const [artists, setArtists] = useState(
     initialArtists
   );
@@ -17,7 +18,7 @@ export default function List() {
       <ul>
         {artists.map(artist => (
           <li key={artist.id}>
-            {artist.name}{' '}
+            {artist.name} {artist.id}
             <button onClick={() => {
               setArtists(
                 artists.filter(a =>
