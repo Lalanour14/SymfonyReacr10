@@ -7,10 +7,16 @@ let initialArtists = [
 ];
 
 export default function List() {
+
+//    state(éta , données)
   const [artists, setArtists] = useState(
     initialArtists
   );
+//  comportements
 
+
+
+//3) afficher (render)
   return (
     <>
       <h1>Sculpteurs inspirants :</h1>

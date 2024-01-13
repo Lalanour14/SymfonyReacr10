@@ -7,16 +7,22 @@ let initialProduit = [
     { id: 2, name: 'Switch', value: "'400" ,type: 'console de jeux',userId:5},
   ];
 export  default function Produit (props){
-        
-    const [produits, setProduits] = useState(
-        initialProduit
-      );
-    
 
-    return <>
-      <h1>List produits</h1> 
+
+//state (état;données)   
+    const [produits, setProduits] = useState(initialProduit);
+
+
+ //comportements
+const handledelete = ()=> {
+  
+}
+    
+//Affichage (render)
+    return( <>
+      <h1>List produits</h1>
       
-      <table>
+      <table className="table">
         <thead>
             <tr>
                 <th> id</th>
@@ -54,18 +60,5 @@ export  default function Produit (props){
         
         </table>  
     </>
-     {artists.map(artist => (
-          <li key={artist.id}>
-            {artist.name}{' '}
-            <button onClick={() => {
-              setArtists(
-                artists.filter(a =>
-                  a.id !== artist.id
-                )
-              );
-            }}>
-              Supprimer
-            </button>
-          </li>
-        ))}
+    );
 }
