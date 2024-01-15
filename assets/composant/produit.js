@@ -6,17 +6,30 @@ let initialProduit = [
     { id: 1, name: 'Canapé', value: "1000" ,type:'Meuble', userId:3},
     { id: 2, name: 'Switch', value: "'400" ,type: 'console de jeux',userId:5},
   ];
+
+
+
 export  default function Produit (props){
 
 
 //state (état;données)   
     const [produits, setProduits] = useState(initialProduit);
+    const [form, setForm] = useState ({name :"", valeur:"", type:"",userId:""});
 
+ //comportements 
+//const handledelete = ()=> {
 
- //comportements
-const handledelete = ()=> {
+//}
+/*const handleChange = (event) => {
+  setNouveauUser (event.target.value);
+} */
+ const handleChange = (event) => {
+  console.log(event.target.value);
+  /*setForm({
+    ...form,
+    name: e.target.value
+  })*/;} ;
   
-}
     
 //Affichage (render)
     return( <>
@@ -54,11 +67,50 @@ const handledelete = ()=> {
           </tr>
         ))}
 
-
         </tbody>
-        
-        
-        </table>  
+        </table> 
+       
+        <form action="submit" className="fomr-control"  >
+           
+           <input  name='name' type='text' placeholder='ajouter name'
+          value={form.nameame}
+          onChange=  {handleChange}/>
+           
+           <input  name='value' type='text' placeholder='ajouter value'
+           
+           value={form.valeur}
+           onChange={e => {
+             setForm({
+               ...form,
+               valeur: e.target.value
+             });
+           }}/>
+           
+           <input  name='type' type='text' placeholder='ajouter type'
+           
+           value={form.type}
+           onChange={e => {
+             setForm({
+               ...form,
+              type: e.target.value
+             });
+           }}/>
+
+           <input  name='userId' type='text' placeholder='ajouter userId'
+           
+           value={form.userId}
+           onChange={e => {
+             setForm({
+               ...form,
+               userId: e.target.value
+             });
+           }}/>
+           
+           
+          <button>Ajouter</button>
+
+       </form>
+      
     </>
     );
 }

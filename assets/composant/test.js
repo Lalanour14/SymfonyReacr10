@@ -15,12 +15,16 @@ const [users,setUsers] = useState ( [
     {id:4,lastName:"Lolo",firstName:"Fafa",birthdate:"1997/12/12",email:"test@test.com",address:"2 rue des changnion",phone:"0709871267"}
     
     ]);
-const  [nouveauUser,setNouveauUser] =  useState ({id :"", lastName:"" , firstName:"" , 
-birthdate:"" , email:"", address:"", phone:""})
+/* const  [nouveauUser,setNouveauUser] =  useState ({ lastName:"" , firstName:"" , 
+birthdate:"" , email:"", address:"", phone:""}) */
+const [lastName ,setLastName] = useState ("") ;
+const [firstName ,setFirstName] = useState ("") ;
+const [birthdate ,setBirthdate] = useState ("") ;
+const [email ,setEmail] = useState ("") ;
+const [address ,setAddress] = useState ("") ;
+const [phone ,setPhone] = useState ("") ;
 
-
-
- // const inputRef = useRef();
+const inputRef = useRef();
 
 // comportent
  const handleDelete = (id) => {
@@ -34,25 +38,28 @@ birthdate:"" , email:"", address:"", phone:""})
     setUsers(UsersCopyUpdated);
  };
 
- const handleSubmit = (event) => {
+ const handleSubmit = (e) => {
 
-    event.preventDefault();
+    e.preventDefault();
     // alert("handleSubmit");
-  // console.log(inputRef.current.value);
-    
+
+  console.log(inputRef.current.value);
+  
   // 1 copie de state 
-     const UsersCopy = [...users];
+    const UsersCopy = [...users];
 
     // 2 manipulation sur copie state
-   const id = new Date().getTime()
-   const lastName =  lastName
-   const firstName =  firstName
+  
+ /*  const lastName =  lastName
+   const firstName = firstName
    const birthdate =  birthdate 
    const email =  email
-   const address =  address
-    const phone =  phone
-
-    UsersCopy.push({id , lastName , firstName , birthdate , email, address, phone});
+   const address =  address 
+    const phone =  phone */
+    const id =  new Date().getTime()
+let newuser ={id , lastName , firstName , birthdate , email, address, phone}
+console.log(newuser);
+UsersCopy.push(newuser);
 
     // 3 modifier le state avec le setter
 
@@ -65,10 +72,10 @@ birthdate:"" , email:"", address:"", phone:""})
 } */
 
 
- const handleForm = (event) => {
+/* const handleForm = (event) => {
     console.log(event.target.value );
     setNouveauUser ({ [event.target.name]: event.target.value });
-  } 
+  } */
 
   
 // Affichage
@@ -76,7 +83,7 @@ birthdate:"" , email:"", address:"", phone:""})
     return (<>
     <div>ListUsers</div>
     <table className='table'>
-<thead>
+        <thead>
             <tr>
                 <th>Id</th>
                 <th>Lastname</th>
@@ -110,36 +117,37 @@ birthdate:"" , email:"", address:"", phone:""})
         </table>
        
         <form action="submit" className="fomr-control" onSubmit={handleSubmit} >
-           <div>
+           
             <input  name='lastName' type='text' placeholder='ajouter Lastname'
-              onChange={handleForm} />
-           </div>
+             value= {lastName} onChange={ (e)=> setLastName (e.target.value)} />
+         
             
-            <div>
+            
                 <input  name="firstName" type='text' placeholder='ajouter Firstname'
-              onChange={handleForm} />
-            </div>
+             value= {firstName} onChange={ (e)=> setFirstName (e.target.value)} />
+           
              
-            <div>
-                <input  name="birthdate" type='text' placeholder='ajouter birthdate'
-              onChange={handleForm} />
-              
-            </div>
             
-            <div>
-                 <input  name="email" type='text' placeholder='ajouter Email'
-              onChange={handleForm} />
-            </div>
+                <input  name="birthdate" type='text' placeholder='ajouter birthdate'
+              value= {birthdate} onChange={ (e)=> setBirthdate (e.target.value)}/>
               
-            <div>
+            
+            
+            
+                 <input  name="email" type='text' placeholder='ajouter Email'
+              value= {email} onChange={ (e)=> 
+                setEmail (e.target.value)} />
+        
+              
+            
                  <input  name="address" type='text' placeholder='ajouter Adress'
-              onChange={handleForm} />
+             value= {address} onChange={ (e)=> setAddress (console.log(e.targetvalue)) } />
 
-            </div>
-            <div>   
+           
+               
                  <input  name="phone" type='text' placeholder='ajouter phone'
-              onChange={handleForm} />
-                </div>
+               value= {phone} onChange={(e)=> setPhone(e.target.value)}/>
+            
         
           
 
