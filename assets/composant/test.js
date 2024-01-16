@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 
 
-
+let nextId= 6 ;
 
 export default function Test (props){
      
@@ -17,14 +17,15 @@ const [users,setUsers] = useState ( [
     ]);
 /* const  [nouveauUser,setNouveauUser] =  useState ({ lastName:"" , firstName:"" , 
 birthdate:"" , email:"", address:"", phone:""}) */
-const [lastName ,setLastName] = useState ("") ;
-const [firstName ,setFirstName] = useState ("") ;
-const [birthdate ,setBirthdate] = useState ("") ;
-const [email ,setEmail] = useState ("") ;
-const [address ,setAddress] = useState ("") ;
-const [phone ,setPhone] = useState ("") ;
+const [form, setForm] = useState ({lastName :"", firstName:"", birthdate:"",
+email:"", address:"", phone:""});
 
-const inputRef = useRef();
+
+/* const [email ,setEmail] = useState ("") ;
+const [address ,setAddress] = useState ("") ;
+const [phone ,setPhone] = useState ("") ; */
+
+//const inputRef = useRef();
 
 // comportent
  const handleDelete = (id) => {
@@ -43,20 +44,20 @@ const inputRef = useRef();
     e.preventDefault();
     // alert("handleSubmit");
 
-  console.log(inputRef.current.value);
+ // console.log(inputRef.current.value);
   
   // 1 copie de state 
     const UsersCopy = [...users];
 
     // 2 manipulation sur copie state
   
- /*  const lastName =  lastName
-   const firstName = firstName
-   const birthdate =  birthdate 
-   const email =  email
-   const address =  address 
-    const phone =  phone */
-    const id =  new Date().getTime()
+  const lastName =  form.lastName
+   const firstName = form.firstName
+   const birthdate = form.birthdate 
+   const email =  form.email
+   const address =  form.address 
+    const phone =  form.phone 
+    const id =  nextId++;
 let newuser ={id , lastName , firstName , birthdate , email, address, phone}
 console.log(newuser);
 UsersCopy.push(newuser);
@@ -65,7 +66,7 @@ UsersCopy.push(newuser);
 
    setUsers(UsersCopy);
 
-  // setNouveauUser("");
+   //setNouveauUser("");
 };
 /* const handleChange = (event) => {
     setNouveauUser (event.target.value);
@@ -119,34 +120,46 @@ UsersCopy.push(newuser);
         <form action="submit" className="fomr-control" onSubmit={handleSubmit} >
            
             <input  name='lastName' type='text' placeholder='ajouter Lastname'
-             value= {lastName} onChange={ (e)=> setLastName (e.target.value)} />
+             value= {form.lastName} onChange={e => {
+              setForm({
+                ...form,
+                lastName: e.target.value
+              });
+            }} />
          
-            
-            
-                <input  name="firstName" type='text' placeholder='ajouter Firstname'
-             value= {firstName} onChange={ (e)=> setFirstName (e.target.value)} />
+           <input  name="firstName" type='text' placeholder='ajouter Firstname'
+             value= {form.firstName} onChange={e => {
+              setForm({
+                ...form,
+                firstName: e.target.value
+              });
+            }} />
            
-             
-            
-                <input  name="birthdate" type='text' placeholder='ajouter birthdate'
-              value= {birthdate} onChange={ (e)=> setBirthdate (e.target.value)}/>
-              
-            
-            
+            <input  name="birthdate" type='text' placeholder='ajouter birthdate'
+              value= {form.birthdate} onChange={ e=> {setForm ({...form,
+               birthdate: e.target.value});
+               }}/>
             
                  <input  name="email" type='text' placeholder='ajouter Email'
-              value= {email} onChange={ (e)=> 
-                setEmail (e.target.value)} />
-        
-              
-            
-                 <input  name="address" type='text' placeholder='ajouter Adress'
-             value= {address} onChange={ (e)=> setAddress (console.log(e.targetvalue)) } />
-
-           
-               
-                 <input  name="phone" type='text' placeholder='ajouter phone'
-               value= {phone} onChange={(e)=> setPhone(e.target.value)}/>
+              value= {form.email} onChange={ e => 
+                {setForm ({ 
+                 ...form,
+                 email: e.target.value});
+              }} />
+                    
+            <input  name="address" type='text' placeholder='ajouter Adress'
+             value= {form.address} onChange={ e => {
+             setForm ({
+              ...form,
+              address: e.target.value}); 
+             }} />
+          
+          <input  name="phone" type='text' placeholder='ajouter phone'
+               value= {form.phone} onChange={ e=> {
+                setForm({
+                  ...form,
+                 phone: e.target.value});
+               }}/>
             
         
           

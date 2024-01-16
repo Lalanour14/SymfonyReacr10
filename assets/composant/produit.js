@@ -6,7 +6,7 @@ let initialProduit = [
     { id: 1, name: 'Canapé', value: "1000" ,type:'Meuble', userId:3},
     { id: 2, name: 'Switch', value: "'400" ,type: 'console de jeux',userId:5},
   ];
-
+let nextId = 4;
 
 
 export  default function Produit (props){
@@ -17,19 +17,40 @@ export  default function Produit (props){
     const [form, setForm] = useState ({name :"", valeur:"", type:"",userId:""});
 
  //comportements 
-//const handledelete = ()=> {
 
-//}
+
 /*const handleChange = (event) => {
   setNouveauUser (event.target.value);
 } */
- const handleChange = (event) => {
+ /*const handleChange = (event) => {
   console.log(event.target.value);
-  /*setForm({
+  setForm({
     ...form,
     name: e.target.value
-  })*/;} ;
+  });} ; */
+ const handleSubmit = (e) => {
+
+    e.preventDefault();
+    // alert("handleSubmit");
+
   
+  // 1 copie de state 
+    const ProduitsCopy = [...produits];
+
+    // 2 manipulation sur copie state
+    const name = form.name
+    const value = form.valeur
+    const type = form.type
+    const userId = form.userId
+  const id =  nextId++;
+let newproduit ={id , name , value , type , userId};
+console.log(newproduit);
+ProduitsCopy.push(newproduit);
+
+    // 3 modifier le state avec le setter
+
+   setProduits(ProduitsCopy);
+ };
     
 //Affichage (render)
     return( <>
@@ -70,11 +91,16 @@ export  default function Produit (props){
         </tbody>
         </table> 
        
-        <form action="submit" className="fomr-control"  >
+        <form action="submit" className="fomr-control" onSubmit={handleSubmit} >
            
            <input  name='name' type='text' placeholder='ajouter name'
-          value={form.nameame}
-          onChange=  {handleChange}/>
+          value={form.name}
+          onChange=  {e => {
+            setForm({
+              ...form,
+              name: e.target.value
+            });
+          }} />
            
            <input  name='value' type='text' placeholder='ajouter value'
            
