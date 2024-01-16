@@ -39,6 +39,7 @@ export default function UserForm ({handleAdd}) {
       setForm({lastName :"", firstName:"", birthdate:"",
       email:"", address:"", phone:""});
        // setUsers(UsersCopy);
+       
     };
     /* const handleChange = (event) => {
         setNouveauUser (event.target.value);

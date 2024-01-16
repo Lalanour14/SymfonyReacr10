@@ -1,12 +1,14 @@
 import React from "react";
 import { useState } from "react";
+import SingleProduit from "./singleproduit";
+import ProduitForm from "./ProduitForm";
 
 let initialProduit = [
     { id: 0, name: 'VTT', value: "300" ,type: 'vélo',userId:4},
     { id: 1, name: 'Canapé', value: "1000" ,type:'Meuble', userId:3},
     { id: 2, name: 'Switch', value: "'400" ,type: 'console de jeux',userId:5},
   ];
-let nextId = 4;
+
 
 
 export  default function Produit (props){
@@ -14,10 +16,19 @@ export  default function Produit (props){
 
 //state (état;données)   
     const [produits, setProduits] = useState(initialProduit);
-    const [form, setForm] = useState ({name :"", valeur:"", type:"",userId:""});
+
 
  //comportements 
-
+const handleDelete = (id) => {
+  //console.log("id");
+  alert('Attention !!voulez allez effacer ce user!!');
+  // 1.copie du state
+  const ProduitsCopy =[...produits] ;
+  // 2.manipuler mon state
+ const ProduitsCopyUpdated = ProduitsCopy.filter(user => user.id !== id);
+  // 3.modifier le state
+  setProduits(ProduitsCopyUpdated);
+};
 
 /*const handleChange = (event) => {
   setNouveauUser (event.target.value);
@@ -28,31 +39,15 @@ export  default function Produit (props){
     ...form,
     name: e.target.value
   });} ; */
- const handleSubmit = (e) => {
+let handleAdd = (produitAjouter) => {
+  //copie du state
+  const ProduitsCopy = [...produits];
+  // 2.manipulation sur la copie
+  ProduitsCopy.push(produitAjouter);
 
-    e.preventDefault();
-    // alert("handleSubmit");
-
-  
-  // 1 copie de state 
-    const ProduitsCopy = [...produits];
-
-    // 2 manipulation sur copie state
-    const name = form.name
-    const value = form.valeur
-    const type = form.type
-    const userId = form.userId
-  const id =  nextId++;
-let newproduit ={id , name , value , type , userId};
-console.log(newproduit);
-ProduitsCopy.push(newproduit);
-
-    // 3 modifier le state avec le setter
-
-   setProduits(ProduitsCopy);
-   setForm("");
- };
-    
+  // 3. modifier le state avec le setter
+  setProduits(ProduitsCopy);
+}
 //Affichage (render)
     return( <>
       <h1>List produits</h1>
@@ -69,75 +64,12 @@ ProduitsCopy.push(newproduit);
         </thead>
         <tbody>
         {produits.map(produit => (
-          <tr key={produit.id}>
-
-           <td>{produit.id}</td> 
-           <td>{produit.name}</td>
-           <td>{produit.value}</td>
-           <td>{produit.type}</td>
-           <td>{produit.userId}</td>
-           
-           <td> <button onClick={() => {
-              setProduits(
-                produits.filter(a =>
-                  a.id !== produit.id
-                )
-              );
-            }}>
-              Supprimer
-            </button></td>
-          </tr>
-        ))}
-
+          <SingleProduit produitInfo ={produit} onProduitDelete={ handleDelete} key={produit.id} />
+              ))}     
         </tbody>
         </table> 
        
-        <form action="submit" className="fomr-control" onSubmit={handleSubmit} >
-           
-           <input  name='name' type='text' placeholder='ajouter name'
-          value={form.name}
-          onChange=  {e => {
-            setForm({
-              ...form,
-              name: e.target.value
-            });
-          }} />
-           
-           <input  name='value' type='text' placeholder='ajouter value'
-           
-           value={form.valeur}
-           onChange={e => {
-             setForm({
-               ...form,
-               valeur: e.target.value
-             });
-           }}/>
-           
-           <input  name='type' type='text' placeholder='ajouter type'
-           
-           value={form.type}
-           onChange={e => {
-             setForm({
-               ...form,
-              type: e.target.value
-             });
-           }}/>
-
-           <input  name='userId' type='text' placeholder='ajouter userId'
-           
-           value={form.userId}
-           onChange={e => {
-             setForm({
-               ...form,
-               userId: e.target.value
-             });
-           }}/>
-           
-           
-          <button>Ajouter</button>
-
-       </form>
-      
+      <ProduitForm handleAdd={handleAdd} /> 
     </>
     );
 }
