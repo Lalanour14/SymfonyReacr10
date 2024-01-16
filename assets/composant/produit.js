@@ -50,6 +50,7 @@ ProduitsCopy.push(newproduit);
     // 3 modifier le state avec le setter
 
    setProduits(ProduitsCopy);
+   setForm("");
  };
     
 //Affichage (render)
