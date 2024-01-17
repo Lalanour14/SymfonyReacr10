@@ -1,14 +1,14 @@
 import React from "react";
+import User from "./user";
 
-
-export function ShowUser () {
+export  function ShowUser () {
 //state
 
 //comportement
 
 //Affiche (render)
     return (
-    <div>
+    <>
         <h1>User</h1>
         <table className="table">
             <thead>
@@ -23,11 +23,10 @@ export function ShowUser () {
                  </tr>
             </thead>
             <tbody>
-                <tr >
-                  
-                </tr> 
+             
             </tbody>
         </table>
+ 
         <table className="table">
         <thead>
             <tr>
@@ -39,13 +38,11 @@ export function ShowUser () {
                 </tr>
         </thead>
         <tbody>
-            <tr >
-
-               
-            </tr>
+      
+      
         </tbody>
         </table>
-    </div>
+    </>
     );
 
 }

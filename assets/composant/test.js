@@ -53,7 +53,7 @@ UsersCopy.push(userAjouter);
 // Affichage
 
     return (<>
-    <div>ListUsers</div>
+    <h1>ListUsers</h1>
     <table className='table'>
         <thead>
             <tr>
