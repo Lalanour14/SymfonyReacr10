@@ -28,8 +28,8 @@ export default function UserForm ({handleAdd}) {
        const birthdate = form.birthdate 
        const email =  form.email
        const address =  form.address 
-        const phone =  form.phone 
-        const id =  nextId++;
+       const phone =  form.phone 
+      const id =  nextId++;
     let userAjouter ={id , lastName , firstName , birthdate , email, address, phone}
     //console.log(userAjouter);
     //UsersCopy.push(newuser);

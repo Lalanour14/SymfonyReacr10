@@ -24,9 +24,9 @@ export default function SingleProduit({produitInfo,onProduitDelete}) {
               Supprimer
             </button></td>
           </tr>
+        
      ) ;
 
-    
 
 
 
