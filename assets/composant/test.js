@@ -68,7 +68,7 @@ UsersCopy.push(userAjouter);
             </tr>
         </thead>
         <tbody>
-        {users.map(user => (console.log(user),
+        {users.map(user => (
           <User userInfo={user} onUserDelete={handleDelete} key={user.id} />
         ))}
         </tbody>

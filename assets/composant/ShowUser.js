@@ -1,5 +1,5 @@
 import React from "react";
-import User from "./user";
+
 
 export  function ShowUser () {
 //state
@@ -38,10 +38,11 @@ export  function ShowUser () {
                 </tr>
         </thead>
         <tbody>
-      
+         
       
         </tbody>
         </table>
+        <a href="/test">retour ListUsers</a>
     </>
     );
 
