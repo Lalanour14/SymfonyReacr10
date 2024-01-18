@@ -1,22 +1,41 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import User from './user';
 import UserForm from './UserForm';
 
 
 
+  
+   
 
 export  default function Test (props){
      
 // state (etat ,données)
 
 const [users,setUsers] = useState ( [
-    {id:1,lastName:"julien",firstName:"Antoine",birthdate:"1990/02/12",email:"test@test.com",address:"2 rue des changnion",phone:"0709871267"},
+   /* {id:1,lastName:"julien",firstName:"Antoine",birthdate:"1990/02/12",email:"test@test.com",address:"2 rue des changnion",phone:"0709871267"},
     {id:2,lastName:"Patou",firstName:"renet",birthdate:"1993/12/12",email:"test@test.com",address:"2 rue des changnion",phone:"0709871267"}  ,
     {id:3,lastName:"julien",firstName:"Pat",birthdate:"1999/06/12",email:"test@test.com",address:"2 rue des changnion",phone:"0709871267"},
     {id:4,lastName:"Lolo",firstName:"Fafa",birthdate:"1997/12/12",email:"test@test.com",address:"2 rue des changnion",phone:"0709871267"}
-    
+    */
     ]);
+  const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+      fetch("http://localhost:8000/api/users", {
+        type: "GET",
+      })
+      .then((response) => {
+       
+        return response.json()
+      })
+      .then((result)=>{
+        console.log (result)
+        setUsers ({user:result})
+      })
+  
+     
+    }, [isMounted]);
 
 
 
@@ -68,7 +87,8 @@ UsersCopy.push(userAjouter);
             </tr>
         </thead>
         <tbody>
-        {users.map(user => (
+        { users.map (user => ( 
+         
           <User userInfo={user} onUserDelete={handleDelete} key={user.id} />
         ))}
         </tbody>
@@ -78,7 +98,13 @@ UsersCopy.push(userAjouter);
     );
 }
 
- 
+/*{users && users.map((user, index) => {
+  return (
+    <li key={index}>
+      {user.Nom} {user.Prenom}
+    </li>
+  );
+})}*/
 
 // Gestion des formulaires
 // 1. création du formulaire
