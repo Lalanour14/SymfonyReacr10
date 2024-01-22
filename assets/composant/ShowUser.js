@@ -5,7 +5,23 @@ export  function ShowUser () {
 //state
 
 //comportement
+/*useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const userResponse = await fetch('http://127.0.0.1:8000/api/users/'+id);
+        const userData = await userResponse.json();
+        setUser(userData);
+        const possessionsResponse = await fetch(`http://127.0.0.1:8000/api/users/${id}/possessions`);
+        const possessionsData = await possessionsResponse.json();
+        setPossessions(possessionsData);
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
+    };
 
+    fetchUserDetails();
+  }, [id]);
+*/
 //Affiche (render)
     return (
     <>

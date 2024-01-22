@@ -2,18 +2,42 @@ import React from "react";
 
 import { useState } from "react";
 
-let nextId= 6 ;
+let nextId= "" ;
 export default function UserForm ({handleAdd}) {
     
 //state
-    const [form, setForm] = useState ({lastName :"", firstName:"", birthdate:"",
-    email:"", address:"", phone:""});
+    const [form, setForm] = useState ({lastName :"", firstName:"", birthdate:"",    email:"", address:"", phone:""});
+
     // comportements 
  
     
-     const handleSubmit = (e) => {
+     const handleSubmit = async (e) => {
     
         e.preventDefault();
+
+        try {
+          // effectuer une requête Post vers API avec les donnèes du nouvelle objet
+          const reponse = await fetch("http://localhost:8000/api/users.json",{
+          method: 'POST',
+          headers:{
+            'Content-Type':'application/json',
+          },
+          body: JSON.stringify(form),
+        
+          });
+          if(reponse.ok){
+            //Le POST a réussi,vous gérer la réponse ici
+            console.log('Objet crée avec succés');
+          }else{
+            // le POST a échoué , gérer les erreurs ici 
+            console.error('Error lors de la création de l\'objet ');
+
+          } 
+         }catch(erreur){
+            console.error('Erreur lors de la requête POST:',erreur)
+
+          }
+     ; 
         // alert("handleSubmit");
     
      // console.log(inputRef.current.value);
@@ -29,8 +53,8 @@ export default function UserForm ({handleAdd}) {
        const email =  form.email
        const address =  form.address 
        const phone =  form.phone 
-      const id =  nextId++;
-    let userAjouter ={id , lastName , firstName , birthdate , email, address, phone}
+      const id = ""
+    let userAjouter ={ id, lastName , firstName , birthdate , email, address, phone}
     //console.log(userAjouter);
     //UsersCopy.push(newuser);
      handleAdd (userAjouter);
@@ -99,4 +123,5 @@ export default function UserForm ({handleAdd}) {
     <button>Ajouter</button>
 </form>
 );
+
 }

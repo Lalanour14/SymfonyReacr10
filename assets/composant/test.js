@@ -32,16 +32,7 @@ useEffect(() => {
   }).finally(() =>{
     setIsMounted(false)
   });
-
-
-   
 }, []);
-
-
-
-
-
-
 // comportents
 
  const handleDelete =  async (id) => {
@@ -120,7 +111,7 @@ UsersCopy.push(userAjouter);
         </tbody>}
       
     </table>
-    <UserForm handleAdd={handleAdd} /> 
+    <UserForm handleAdd={handleAdd} keys={users.id} /> 
     </>
     );
 }
