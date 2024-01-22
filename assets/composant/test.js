@@ -47,7 +47,7 @@ useEffect(() => {
  const handleDelete =  async (id) => {
  
    try {
-     await fetch("http://localhost:8000/api/users/${id}.json", {
+     await fetch('http://localhost:8000/api/users/'+id, {
       method: "DELETE",
       headers:{
         'content-Type':' application/json',
@@ -100,7 +100,7 @@ UsersCopy.push(userAjouter);
           {users.map(user =>(
           <tr key={user.id} >
            <td>{user.id}</td>
-           <td><a href="/showuser" > {user.lastName}</a></td>
+           <td><a href="/showUser" > {user.lastName}</a></td>
            <td>{user.firstName}</td>
            <td>{user.birthdate}</td>
            <td>{user.email}</td>
