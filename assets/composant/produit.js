@@ -34,16 +34,28 @@ export  default function Produit (){
     }, []);
 //console.log(map());
  //comportements 
-const handleDelete = (id) => {
-  //console.log("id");
-  alert('Attention !!voulez allez effacer ce user!!');
-  // 1.copie du state
-  const ProduitsCopy =[...produits] ;
-  // 2.manipuler mon state
- const ProduitsCopyUpdated = ProduitsCopy.filter(user => user.id !== id);
-  // 3.modifier le state
-  setProduits(ProduitsCopyUpdated);
-};
+
+ const handleDelete =  async (id) => {
+ 
+  try {
+    await fetch('http://localhost:8000/api/possesions/'+id, {
+     method: "DELETE",
+     headers:{
+       'content-Type':' application/json',
+     },
+     
+   });
+
+ alert('Attention !!voulez allez effacer ce user!!');
+ // 1.copie du state
+//const UsersCopy =[...users] ;
+ // 2.manipuler mon state
+const newProduits = produits.filter((produit) => produit.id !== id);
+
+ setProduits(newProduits);
+} catch (erreur){
+ console.error ("Erreur lors de la suppression de l'objet " ,erreur)
+}};
 
 /*const handleChange = (event) => {
   setNouveauUser (event.target.value);
@@ -89,7 +101,7 @@ let handleAdd = (produitAjouter) => {
            <td>{produit.userId}</td>
            
            <td><button
-           onClick={(() => handleDelete(user.id))}
+           onClick={(() => handleDelete(produit.id))}
            >Supprimer</button></td>
             
             
