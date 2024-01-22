@@ -17,7 +17,7 @@ export  default function Produit (props){
 //state (état;données)   
     const [produits, setProduits] = useState(initialProduit);
 
-
+//console.log(map());
  //comportements 
 const handleDelete = (id) => {
   //console.log("id");

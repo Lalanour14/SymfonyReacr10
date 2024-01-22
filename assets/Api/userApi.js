@@ -1,10 +1,11 @@
 
-
 export default function Api() {
-    const getUsers = () => {
-      return fetch("http://localhost:8000/api/users", {
+    const getUsers = async () => {
+      
+      const res = await fetch("http://localhost:8000/api/users.json", {
         type: "GET",
-      }).then((res) => res.json());
+      });
+      return await res.json();
     };
   
     return {

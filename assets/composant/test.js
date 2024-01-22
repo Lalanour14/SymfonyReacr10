@@ -3,60 +3,68 @@ import { useState,useEffect } from 'react';
 import User from './user';
 import UserForm from './UserForm';
 
+import Api from '../Api/userApi';
+
 
 
   
    
 
-export  default function Test (props){
+export  default function Test (){
      
 // state (etat ,données)
 
-const [users,setUsers] = useState ( [
-   /* {id:1,lastName:"julien",firstName:"Antoine",birthdate:"1990/02/12",email:"test@test.com",address:"2 rue des changnion",phone:"0709871267"},
-    {id:2,lastName:"Patou",firstName:"renet",birthdate:"1993/12/12",email:"test@test.com",address:"2 rue des changnion",phone:"0709871267"}  ,
-    {id:3,lastName:"julien",firstName:"Pat",birthdate:"1999/06/12",email:"test@test.com",address:"2 rue des changnion",phone:"0709871267"},
-    {id:4,lastName:"Lolo",firstName:"Fafa",birthdate:"1997/12/12",email:"test@test.com",address:"2 rue des changnion",phone:"0709871267"}
-    */
-    ]);
-  const [isMounted, setIsMounted] = useState(false);
+const [users,setUsers] = useState ([]);
+const [isMounted, setIsMounted] = useState(false);
+const [errors, setErrors] = useState();
 
-    useEffect(() => {
-      fetch("http://localhost:8000/api/users", {
-        type: "GET",
-      })
-      .then((response) => {
-       
-        return response.json()
-      })
-      .then((result)=>{
-        console.log (result)
-        setUsers ({user:result})
-      })
-  
-     
-    }, [isMounted]);
+useEffect(() => {
+  fetch("http://localhost:8000/api/users.json",  {
+    type: "GET",
+  })
+  .then(response => response.json())
+  .then(users =>{
+   // console.log (users)
+    setUsers(users)
+    setIsMounted(false)
+  }).catch((e) => {
+    setErrors(e)
+  }).finally(() =>{
+    setIsMounted(false)
+  });
+
+
+   
+}, []);
 
 
 
 
-/* const [email ,setEmail] = useState ("") ;
-const [address ,setAddress] = useState ("") ;
-const [phone ,setPhone] = useState ("") ; */
 
-//const inputRef = useRef();
 
-// comportent
-const handleDelete = (id) => {
-  //console.log("id");
+// comportents
+
+ const handleDelete =  async (id) => {
+ 
+   try {
+     await fetch("http://localhost:8000/api/users/${id}.json", {
+      method: "DELETE",
+      headers:{
+        'content-Type':' application/json',
+      },
+      
+    });
+
   alert('Attention !!voulez allez effacer ce user!!');
   // 1.copie du state
-  const UsersCopy =[...users] ;
+ //const UsersCopy =[...users] ;
   // 2.manipuler mon state
- const UsersCopyUpdated = UsersCopy.filter(user => user.id !== id);
-  // 3.modifier le state
-  setUsers(UsersCopyUpdated);
-};
+ const newUsers = users.filter((user) => user.id !== id);
+
+  setUsers(newUsers);
+} catch (erreur){
+  console.error ("Erreur lors de la suppression de l'objet " ,erreur)
+}};
 
 let handleAdd = (userAjouter) => {
 // 1 copie de state 
@@ -86,25 +94,55 @@ UsersCopy.push(userAjouter);
                 <th>actions</th>
             </tr>
         </thead>
-        <tbody>
-        { users.map (user => ( 
-         
-          <User userInfo={user} onUserDelete={handleDelete} key={user.id} />
-        ))}
-        </tbody>
+        {users && <tbody>
+        
+        <>
+          {users.map(user =>(
+          <tr key={user.id} >
+           <td>{user.id}</td>
+           <td><a href="/showuser" > {user.lastName}</a></td>
+           <td>{user.firstName}</td>
+           <td>{user.birthdate}</td>
+           <td>{user.email}</td>
+           <td>{user.address}</td>
+           <td>{user.phone}</td>
+           <td><button
+           onClick={(() => handleDelete(user.id))}
+           >Supprimer</button></td>
+            
+            
+            
+            </tr> 
+          
+          ))}
+        </>
+        
+        </tbody>}
+      
     </table>
-      <UserForm  handleAdd ={handleAdd} /> 
+    <UserForm handleAdd={handleAdd} /> 
     </>
     );
 }
-
-/*{users && users.map((user, index) => {
-  return (
-    <li key={index}>
-      {user.Nom} {user.Prenom}
-    </li>
-  );
-})}*/
+//(;   {users && users.map(user => {
+ // <UserForm  handleAdd ={handleAdd} keys={user.id} />)
+ 
+ /**/
+ /* */
+ /*{users && <div>
+        
+  <ul>
+    {users.map(user =>(<li key={user.id}><a href="/showuser" >{user.lastName}
+  
+    </a><button
+     onClick={(() => onUserDelete(userInfo.id))}
+     >Supprimer</button></li>,
+     <li>{user.id} </li>
+      ))}
+  </ul>
+  
+  </div>}
+ 
 
 // Gestion des formulaires
 // 1. création du formulaire
@@ -114,3 +152,11 @@ UsersCopy.push(userAjouter);
 // 3b.  méthode 2 : sync descendante / ascendante
  
 
+/* {id:1,lastName:"julien",firstName:"Antoine",birthdate:"1990/02/12",email:"test@test.com",address:"2 rue des changnion",phone:"0709871267"},
+    {id:2,lastName:"Patou",firstName:"renet",birthdate:"1993/12/12",email:"test@test.com",address:"2 rue des changnion",phone:"0709871267"}  ,
+    {id:3,lastName:"julien",firstName:"Pat",birthdate:"1999/06/12",email:"test@test.com",address:"2 rue des changnion",phone:"0709871267"},
+    {id:4,lastName:"Lolo",firstName:"Fafa",birthdate:"1997/12/12",email:"test@test.com",address:"2 rue des changnion",phone:"0709871267"}
+    */
+
+    
+   /*  */
