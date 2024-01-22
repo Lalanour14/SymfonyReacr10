@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import SingleProduit from "./singleproduit";
 import ProduitForm from "./ProduitForm";
 
@@ -10,13 +10,28 @@ let initialProduit = [
   ];
 
 
-
-export  default function Produit (props){
+export  default function Produit (){
 
 
 //state (état;données)   
-    const [produits, setProduits] = useState(initialProduit);
-
+    const [produits, setProduits] = useState([]);
+    const [isMounted, setIsMounted] = useState(false);
+    const [errors, setErrors] = useState();
+    useEffect(() => {
+      fetch("http://localhost:8000/api/possesions.json",  {
+        type: "GET",
+      })
+      .then(response => response.json())
+      .then(produits =>{
+       // console.log (users)
+        setProduits(produits)
+        setIsMounted(false)
+      }).catch((e) => {
+        setErrors(e)
+      }).finally(() =>{
+        setIsMounted(false)
+      });
+    }, []);
 //console.log(map());
  //comportements 
 const handleDelete = (id) => {
@@ -62,11 +77,29 @@ let handleAdd = (produitAjouter) => {
                 <th> userId</th>
                 </tr>
         </thead>
-        <tbody>
-        {produits.map(produit => (
-          <SingleProduit produitInfo ={produit} onProduitDelete={ handleDelete} key={produit.id} />
-              ))}     
-        </tbody>
+        {produits && <tbody>
+        
+        <>
+          {produits.map(produit =>(
+          <tr key={produit.id} >
+           <td>{produit.id}</td>
+           <td><a href="/" > {produit.name}</a></td>
+           <td>{produit.value}</td>
+           <td>{produit.type}</td>
+           <td>{produit.userId}</td>
+           
+           <td><button
+           onClick={(() => handleDelete(user.id))}
+           >Supprimer</button></td>
+            
+            
+            
+            </tr> 
+          
+          ))}
+        </>
+        
+        </tbody>}
         </table> 
        
       <ProduitForm handleAdd={handleAdd} /> 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
-import User from './user';
+
 import UserForm from './UserForm';
 
 import Api from '../Api/userApi';
@@ -91,7 +91,7 @@ UsersCopy.push(userAjouter);
           {users.map(user =>(
           <tr key={user.id} >
            <td>{user.id}</td>
-           <td><a href="/showUser" > {user.lastName}</a></td>
+           <td><a href="/showuser" > {user.lastName}</a></td>
            <td>{user.firstName}</td>
            <td>{user.birthdate}</td>
            <td>{user.email}</td>

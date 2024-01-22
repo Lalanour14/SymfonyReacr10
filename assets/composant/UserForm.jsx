@@ -60,7 +60,7 @@ export default function UserForm ({handleAdd}) {
      handleAdd (userAjouter);
 
 // 3 modifier le state avec le setter
-      setForm({lastName :"", firstName:"", birthdate:"",
+      setForm({ lastName :"", firstName:"", birthdate:"",
       email:"", address:"", phone:""});
        // setUsers(UsersCopy);
        

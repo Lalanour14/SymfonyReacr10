@@ -1,27 +1,17 @@
 import React from "react";
+import { useState,useEffect} from "react";
+
+
+
 
 
 export  function ShowUser () {
 //state
 
+  const [user, setUser] = useState({});
+ // const [possessions, setPossessions] = useState([]);
 //comportement
-/*useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        const userResponse = await fetch('http://127.0.0.1:8000/api/users/'+id);
-        const userData = await userResponse.json();
-        setUser(userData);
-        const possessionsResponse = await fetch(`http://127.0.0.1:8000/api/users/${id}/possessions`);
-        const possessionsData = await possessionsResponse.json();
-        setPossessions(possessionsData);
-      } catch (error) {
-        console.error('Error fetching user details:', error);
-      }
-    };
 
-    fetchUserDetails();
-  }, [id]);
-*/
 //Affiche (render)
     return (
     <>
@@ -54,7 +44,17 @@ export  function ShowUser () {
                 </tr>
         </thead>
         <tbody>
-         
+        <tr >
+           <td>{user.id}</td> 
+           <td> {user.lastName}</td>
+           <td>{user.firstName}</td>
+           <td>{user.birthdate}</td>
+           <td>{user.email}</td>
+           <td>{user.address}</td>
+           <td>{user.phone}</td>
+
+          </tr> 
+
       
         </tbody>
         </table>
