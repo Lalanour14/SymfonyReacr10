@@ -4,7 +4,7 @@ import { useState } from "react";
 let nextId = "";
 export default function ProduitForm ({handleAdd}){
     //state (état, données)
-    const [form, setForm] = useState ({name :"", value:"", type:"", userId:""});
+    const [form, setForm] = useState ({name :"", valeur:"", type:"", userId:""});
     // comportement
     const handleSubmit = async(e) => {
 
@@ -12,7 +12,7 @@ export default function ProduitForm ({handleAdd}){
         // alert("handleSubmit");
         try {
           // effectuer une requête Post vers API avec les donnèes du nouvelle objet
-          const reponse = await fetch("http://localhost:8000/api/possesions.json",{
+          const reponse = await fetch("http://localhost:8000/api/possesions",{
           method: 'POST',
           headers:{
             'Content-Type':'application/json',
@@ -39,7 +39,7 @@ export default function ProduitForm ({handleAdd}){
     
         // 2 manipulation sur copie state
         const name = form.name
-        const value = form.value
+        const value = form.valeur
         const type = form.type
         const userId = form.userId
       const id =  "";
@@ -67,13 +67,13 @@ export default function ProduitForm ({handleAdd}){
       });
     }} />
      
-     <input  name='value' type='text' placeholder='ajouter value'
+     <input  name='valeur' type='text' placeholder='ajouter value'
      
-     value={form.value}
+     value={form.valeur}
      onChange={e => {
        setForm({
          ...form,
-         value: e.target.value
+         valeur: e.target.value
        });
      }}/>
      
